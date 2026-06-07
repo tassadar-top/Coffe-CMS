@@ -23,14 +23,7 @@ final class Database
             return $this->pdo;
         }
 
-        $dsn = sprintf(
-            '%s:host=%s;port=%d;dbname=%s;charset=%s',
-            $this->config['driver'],
-            $this->config['host'],
-            $this->config['port'],
-            $this->config['database'],
-            $this->config['charset']
-        );
+        $dsn = $this->buildDsn();
 
         try {
             $this->pdo = new PDO($dsn, $this->config['username'], $this->config['password'], [
@@ -46,5 +39,32 @@ final class Database
         }
 
         return $this->pdo;
+    }
+
+    private function buildDsn(): string
+    {
+        $driver = (string) $this->config['driver'];
+        $database = (string) $this->config['database'];
+        $charset = (string) $this->config['charset'];
+        $socket = trim((string) ($this->config['socket'] ?? ''));
+
+        if ($socket !== '') {
+            return sprintf(
+                '%s:unix_socket=%s;dbname=%s;charset=%s',
+                $driver,
+                $socket,
+                $database,
+                $charset
+            );
+        }
+
+        return sprintf(
+            '%s:host=%s;port=%d;dbname=%s;charset=%s',
+            $driver,
+            (string) $this->config['host'],
+            (int) $this->config['port'],
+            $database,
+            $charset
+        );
     }
 }

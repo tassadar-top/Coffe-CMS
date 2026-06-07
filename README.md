@@ -45,6 +45,7 @@ Modular PHP CMS with one shared core and switchable business profiles. The curre
 ## Notes
 
 - Change `admin_path` before production use.
+- Database config now supports `socket` by default. If `socket` is non-empty, PDO uses it instead of `host/port`.
 - Allowed upload types are `jpg`, `jpeg`, `png`, and `webp`.
 - Some modules are still intentionally placeholder-level, for example `delivery`, `orders`, and `account`.
 - PHP is not installed in this environment, so runtime verification and syntax checks were not executed here.
