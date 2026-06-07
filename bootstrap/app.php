@@ -34,6 +34,7 @@ use App\Core\ModuleManager;
 use App\Core\Router;
 use App\Services\BusinessProfileManager;
 use App\Services\ModuleAccessService;
+use App\Services\SettingsService;
 use App\Services\ThemeManager;
 
 $config = new Config(CONFIG_PATH);
@@ -41,10 +42,11 @@ $router = new Router();
 $database = new Database($config->get('database'));
 $profiles = new BusinessProfileManager($config);
 $moduleAccess = new ModuleAccessService($profiles);
+$settings = new SettingsService($config, $database);
 $themes = new ThemeManager($config, $database, $profiles);
 $modules = new ModuleManager($router, $database, $config, $profiles, $moduleAccess);
 $modules->registerDefaultModules();
 
-$GLOBALS['coffee_cms_container'] = [$router, $config, $database, $profiles, $moduleAccess, $themes];
+$GLOBALS['coffee_cms_container'] = [$router, $config, $database, $profiles, $moduleAccess, $themes, $settings];
 
 return $GLOBALS['coffee_cms_container'];

@@ -17,6 +17,7 @@ use App\Modules\Promotions\PromotionController;
 use App\Modules\Pricing\PricingController;
 use App\Modules\Reviews\ReviewsController;
 use App\Modules\Account\AccountController;
+use App\Modules\Settings\SettingsController;
 use App\Modules\SEO\SeoController;
 use App\Modules\Services\ServicesController;
 use App\Modules\Themes\ThemeController;
@@ -80,6 +81,8 @@ final class ModuleManager
         $this->router->post("/{$adminPath}/login", [AdminController::class, 'login']);
         $this->router->post("/{$adminPath}/logout", [AdminController::class, 'logout']);
         $this->router->get("/{$adminPath}", [AdminController::class, 'dashboard']);
+        $this->router->get("/{$adminPath}/settings", [SettingsController::class, 'index']);
+        $this->router->post("/{$adminPath}/settings/update", [SettingsController::class, 'update']);
 
         $this->router->get("/{$adminPath}/pages", [PageController::class, 'index']);
         $this->router->get("/{$adminPath}/pages/edit", [PageController::class, 'edit']);

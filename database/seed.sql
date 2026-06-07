@@ -37,4 +37,11 @@ INSERT INTO seo_meta (entity_type, entity_id, meta_title, meta_description, cano
 INSERT INTO settings (setting_key, setting_value) VALUES
 ('business_profile', 'coffee_shop'),
 ('default_theme', 'coffee-modern'),
-('operator_email', 'orders@example.com');
+('operator_email', 'orders@example.com'),
+('business_name', 'Coffee CMS'),
+('tagline', 'One modular CMS for many business profiles'),
+('logo_path', ''),
+('logo_alt', 'Coffee CMS logo'),
+('contact_phone', ''),
+('contact_email', 'hello@example.com'),
+('address', '');

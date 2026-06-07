@@ -78,6 +78,7 @@ final class BusinessProfileManager
             'forms' => ['title' => 'Forms', 'path' => '/forms'],
             'blog' => ['title' => 'Blog', 'path' => '/blog'],
             'seo' => ['title' => 'SEO', 'path' => '/seo'],
+            'settings' => ['title' => 'Settings', 'path' => '/settings'],
             'themes' => ['title' => 'Themes', 'path' => '/themes'],
             'users' => ['title' => 'Users', 'path' => '/users'],
             'security' => ['title' => 'Security', 'path' => '/security'],
@@ -92,6 +93,8 @@ final class BusinessProfileManager
                 $result[$module] = $sections[$module];
             }
         }
+
+        $result['settings'] = $sections['settings'];
 
         return $result;
     }

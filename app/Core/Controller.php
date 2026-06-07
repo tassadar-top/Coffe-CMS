@@ -6,6 +6,7 @@ namespace App\Core;
 
 use App\Services\BusinessProfileManager;
 use App\Services\ModuleAccessService;
+use App\Services\SettingsService;
 use App\Services\ThemeManager;
 use Throwable;
 
@@ -16,6 +17,7 @@ abstract class Controller
     protected BusinessProfileManager $profiles;
     protected ModuleAccessService $moduleAccess;
     protected ThemeManager $themes;
+    protected SettingsService $settings;
 
     public function __construct()
     {
@@ -26,11 +28,11 @@ abstract class Controller
                 require BASE_PATH . '/bootstrap/app.php';
             }
 
-            [, $config, $database, $profiles, $moduleAccess, $themes] = $GLOBALS['coffee_cms_container'];
-            $container = [$config, $database, $profiles, $moduleAccess, $themes];
+            [, $config, $database, $profiles, $moduleAccess, $themes, $settings] = $GLOBALS['coffee_cms_container'];
+            $container = [$config, $database, $profiles, $moduleAccess, $themes, $settings];
         }
 
-        [$this->config, $this->database, $this->profiles, $this->moduleAccess, $this->themes] = $container;
+        [$this->config, $this->database, $this->profiles, $this->moduleAccess, $this->themes, $this->settings] = $container;
     }
 
     protected function view(string $template, array $data = [], ?string $layout = 'layout'): void
@@ -41,6 +43,8 @@ abstract class Controller
             'adminPath' => (string) $this->config->get('config.app.admin_path', 'secret-admin'),
             'activeTheme' => $this->themes->activeThemeKey(),
             'activeThemeConfig' => $this->themes->activeThemeConfig(),
+            'siteSettings' => $this->settings->all(),
+            'branding' => $this->settings->branding(),
         ], $data);
 
         View::render($template, $data, $layout);
