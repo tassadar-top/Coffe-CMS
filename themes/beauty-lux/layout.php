@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= \App\Core\Security::escape($profile['name'] ?? 'Beauty Lux'); ?></title>
+    <link rel="stylesheet" href="<?= asset_url('css/app.css'); ?>">
+    <link rel="stylesheet" href="<?= theme_asset_url('theme.css'); ?>">
+</head>
+<body class="theme-shell beauty-lux">
+<header class="theme-header">
+    <div class="container theme-nav">
+        <a class="theme-brand" href="<?= base_url(); ?>">Beauty Lux</a>
+        <nav class="theme-links">
+            <a href="<?= base_url(); ?>">Home</a>
+            <a href="<?= base_url('services'); ?>">Treatments</a>
+            <a href="<?= base_url('reviews'); ?>">Reviews</a>
+        </nav>
+    </div>
+</header>
+<main class="container theme-main">
+    <?= $content; ?>
+</main>
+</body>
+</html>
